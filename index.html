@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient with Boxes Example</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-image 0.5s ease-in-out;
+            background-image: linear-gradient(to bottom, #F04770, #F78C6A, #FFD167, #06D7A0, #108AB1, #073A4B);
+            background-size: cover;
+        }
+
+        .box-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box {
+            width: 300px;
+            height: 50px;
+            border-radius: 25px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .box[data-color]::after {
+            content: "Copied";
+            position: absolute;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 10px;
+            opacity: 0;
+            font-size: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        .box.copied::after {
+            opacity: 1;
+        }
+
+        /* Colors for Group 1 */
+        .box[data-color="#F04770"] { background-color: #F04770; }
+        .box[data-color="#F78C6A"] { background-color: #F78C6A; }
+        .box[data-color="#FFD167"] { background-color: #FFD167; }
+        .box[data-color="#06D7A0"] { background-color: #06D7A0; }
+        .box[data-color="#108AB1"] { background-color: #108AB1; }
+        .box[data-color="#073A4B"] { background-color: #073A4B; }
+
+        /* Colors for Group 2 */
+        .box[data-color="#FFBB94"] { background-color: #FFBB94; }
+        .box[data-color="#FB9590"] { background-color: #FB9590; }
+        .box[data-color="#DC586D"] { background-color: #DC586D; }
+        .box[data-color="#A33757"] { background-color: #A33757; }
+        .box[data-color="#852E4E"] { background-color: #852E4E; }
+        .box[data-color="#4C1D3D"] { background-color: #4C1D3D; }
+
+        /* Colors for Group 3 */
+        .box[data-color="#80EE98"] { background-color: #80EE98; }
+        .box[data-color="#46DFB1"] { background-color: #46DFB1; }
+        .box[data-color="#09D1C7"] { background-color: #09D1C7; }
+        .box[data-color="#15919B"] { background-color: #15919B; }
+        .box[data-color="#0C6478"] { background-color: #0C6478; }
+        .box[data-color="#213A58"] { background-color: #213A58; }
+
+        /* Colors for Group 4 */
+        .box[data-color="#F4E7F8"] { background-color: #F4E7F8; }
+        .box[data-color="#F2DDDC"] { background-color: #F2DDDC; }
+        .box[data-color="#F6BCBA"] { background-color: #F6BCBA; }
+        .box[data-color="#E3AADD"] { background-color: #E3AADD; }
+        .box[data-color="#C8A8E9"] { background-color: #C8A8E9; }
+        .box[data-color="#C3C7F4"] { background-color: #C3C7F4; }
+
+        /* Colors for Group 5 */
+        .box[data-color="#9EABA2"] { background-color: #9EABA2; }
+        .box[data-color="#BDD1C5"] { background-color: #BDD1C5; }
+        .box[data-color="#EECC8C"] { background-color: #EECC8C; }
+        .box[data-color="#E8B298"] { background-color: #E8B298; }
+        .box[data-color="#D3A29D"] { background-color: #D3A29D; }
+        .box[data-color="#A36361"] { background-color: #A36361; }
+
+        /* Colors for Group 6 */
+        .box[data-color="#E7F5DC"] { background-color: #E7F5DC; }
+        .box[data-color="#CFE1B9"] { background-color: #CFE1B9; }
+        .box[data-color="#B6C99B"] { background-color: #B6C99B; }
+        .box[data-color="#98A77C"] { background-color: #98A77C; }
+        .box[data-color="#88976C"] { background-color: #88976C; }
+        .box[data-color="#728156"] { background-color: #728156; }
+
+        /* Colors for Group 7 */
+        .box[data-color="#F109FD"] { background-color: #F109FD; }
+        .box[data-color="#BF35F7"] { background-color: #BF35F7; }
+        .box[data-color="#9658F1"] { background-color: #9658F1; }
+        .box[data-color="#6C7DEC"] { background-color: #6C7DEC; }
+        .box[data-color="#3BA7E5"] { background-color: #3BA7E5; }
+        .box[data-color="#1DC1E2"] { background-color: #1DC1E2; }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .footer button {
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer button:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .footer button.active {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <div class="box-container" id="group1">
+        <div class="box" data-color="#F04770">#F04770</div>
+        <div class="box" data-color="#F78C6A">#F78C6A</div>
+        <div class="box" data-color="#FFD167">#FFD167</div>
+        <div class="box" data-color="#06D7A0">#06D7A0</div>
+        <div class="box" data-color="#108AB1">#108AB1</div>
+        <div class="box" data-color="#073A4B">#073A4B</div>
+    </div>
+
+    <div class="box-container" id="group2" style="display: none;">
+        <div class="box" data-color="#FFBB94">#FFBB94</div>
+        <div class="box" data-color="#FB9590">#FB9590</div>
+        <div class="box" data-color="#DC586D">#DC586D</div>
+        <div class="box" data-color="#A33757">#A33757</div>
+        <div class="box" data-color="#852E4E">#852E4E</div>
+        <div class="box" data-color="#4C1D3D">#4C1D3D</div>
+    </div>
+
+    <div class="box-container" id="group3" style="display: none;">
+        <div class="box" data-color="#80EE98">#80EE98</div>
+        <div class="box" data-color="#46DFB1">#46DFB1</div>
+        <div class="box" data-color="#09D1C7">#09D1C7</div>
+        <div class="box" data-color="#15919B">#15919B</div>
+        <div class="box" data-color="#0C6478">#0C6478</div>
+        <div class="box" data-color="#213A58">#213A58</div>
+    </div>
+
+    <div class="box-container" id="group4" style="display: none;">
+        <div class="box" data-color="#F4E7F8">#F4E7F8</div>
+        <div class="box" data-color="#F2DDDC">#F2DDDC</div>
+        <div class="box" data-color="#F6BCBA">#F6BCBA</div>
+        <div class="box" data-color="#E3AADD">#E3AADD</div>
+        <div class="box" data-color="#C8A8E9">#C8A8E9</div>
+        <div class="box" data-color="#C3C7F4">#C3C7F4</div>
+    </div>
+
+    <div class="box-container" id="group5" style="display: none;">
+        <div class="box" data-color="#9EABA2">#9EABA2</div>
+        <div class="box" data-color="#BDD1C5">#BDD1C5</div>
+        <div class="box" data-color="#EECC8C">#EECC8C</div>
+        <div class="box" data-color="#E8B298">#E8B298</div>
+        <div class="box" data-color="#D3A29D">#D3A29D</div>
+        <div class="box" data-color="#A36361">#A36361</div>
+    </div>
+
+    <div class="box-container" id="group6" style="display: none;">
+        <div class="box" data-color="#E7F5DC">#E7F5DC</div>
+        <div class="box" data-color="#CFE1B9">#CFE1B9</div>
+        <div class="box" data-color="#B6C99B">#B6C99B</div>
+        <div class="box" data-color="#98A77C">#98A77C</div>
+        <div class="box" data-color="#88976C">#88976C</div>
+        <div class="box" data-color="#728156">#728156</div>
+    </div>
+
+    <div class="box-container" id="group7" style="display: none;">
+        <div class="box" data-color="#F109FD">#F109FD</div>
+        <div class="box" data-color="#BF35F7">#BF35F7</div>
+        <div class="box" data-color="#9658F1">#9658F1</div>
+        <div class="box" data-color="#6C7DEC">#6C7DEC</div>
+        <div class="box" data-color="#3BA7E5">#3BA7E5</div>
+        <div class="box" data-color="#1DC1E2">#1DC1E2</div>
+    </div>
+</div>
+    <div class="footer">
+        <button id="btnGroup1" class="active">1</button>
+        <button id="btnGroup2">2</button>
+        <button id="btnGroup3">3</button>
+        <button id="btnGroup4">4</button>
+        <button id="btnGroup5">5</button>
+        <button id="btnGroup6">6</button>
+        <button id="btnGroup7">7</button>
+    </div>
+
+    <script>
+        const body = document.body;
+        const gradients = {
+            group1: 'linear-gradient(to bottom, #F04770, #F78C6A, #FFD167, #06D7A0, #108AB1, #073A4B)',
+            group2: 'linear-gradient(to bottom, #FFBB94, #FB9590, #DC586D, #A33757, #852E4E, #4C1D3D)',
+            group3: 'linear-gradient(to bottom, #80EE98, #46DFB1, #09D1C7, #15919B, #0C6478, #213A58)',
+            group4: 'linear-gradient(to bottom, #F4E7F8, #F2DDDC, #F6BCBA, #E3AADD, #C8A8E9, #C3C7F4)',
+            group5: 'linear-gradient(to bottom, #9EABA2, #BDD1C5, #EECC8C, #E8B298, #D3A29D, #A36361)',
+            group6: 'linear-gradient(to bottom, #E7F5DC, #CFE1B9, #B6C99B, #98A77C, #88976C, #728156)',
+            group7: 'linear-gradient(to bottom, #F109FD, #BF35F7, #9658F1, #6C7DEC, #3BA7E5, #1DC1E2)'
+        };
+
+        const groups = ['group1', 'group2', 'group3', 'group4', 'group5', 'group6', 'group7'];
+
+        groups.forEach((group, i) => {
+            document.getElementById(`btnGroup${i + 1}`).addEventListener('click', () => {
+                groups.forEach(g => document.getElementById(g).style.display = 'none');
+                document.getElementById(group).style.display = 'flex';
+
+                groups.forEach((_, i) => {
+                    document.getElementById(`btnGroup${i + 1}`).classList.remove('active');
+                });
+                document.getElementById(`btnGroup${i + 1}`).classList.add('active');
+
+                body.style.backgroundImage = gradients[group];
+            });
+        });
+
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.addEventListener('click', () => {
+                const color = box.getAttribute('data-color');
+                navigator.clipboard.writeText(color).then(() => {
+                    box.classList.add('copied');
+                    setTimeout(() => {
+                        box.classList.remove('copied');
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
